@@ -16,7 +16,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rafael's Portfolio</title>
+<title>Rafael Mahesa Bayu Raditya | Information Systems undergraduate, designer, front-end developer</title>
 <!-- STYLE 2: FONTS -> swap the family name here AND in --font below -->
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
@@ -89,7 +89,7 @@
 
   /* ---------- Hero ---------- */
   .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:7rem var(--m) 3rem}
-  .hero h1{font-size:clamp(4rem,17vw,16rem);font-weight:800;letter-spacing:-.06em;line-height:.86;will-change:translate,opacity}
+  .hero h1{font-size:clamp(3rem,11.5vw,11rem);font-weight:800;letter-spacing:-.06em;line-height:.86;will-change:translate,opacity}
   .line{display:block;overflow:hidden;padding:.1em 0 .06em}
   .ch{display:inline-block;background:linear-gradient(180deg,#fff 20%,#7d7d7d);-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero-meta{margin-top:2rem;display:grid;gap:1.75rem}
@@ -97,7 +97,7 @@
   .rot{font-weight:800;font-size:clamp(1.8rem,4.2vw,3.2rem);letter-spacing:-.04em;line-height:1.1;margin-bottom:1rem}
   .rwrap{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em}
   #rw{display:inline-block;background:linear-gradient(180deg,#fff,#8d8d8d);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .shine{font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.3;letter-spacing:-.02em;max-width:30ch;background:linear-gradient(110deg,#8a8a8a 38%,#fff 50%,#8a8a8a 62%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3.2s linear infinite}
+  .shine{font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.3;letter-spacing:-.02em;max-width:36ch;background:linear-gradient(110deg,#8a8a8a 38%,#fff 50%,#8a8a8a 62%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3.2s linear infinite}
   @keyframes shine{from{background-position:120% 0}to{background-position:-120% 0}}
   blockquote{font-size:clamp(1.05rem,1.8vw,1.25rem);margin-top:1rem;max-width:30ch;font-style:italic}
   .who{display:flex;gap:.25rem 1.25rem;flex-wrap:wrap;align-items:center}
@@ -158,6 +158,29 @@
   .name{font-weight:800;font-size:clamp(3rem,10.5vw,10rem);letter-spacing:-.06em;line-height:.9;margin-bottom:3rem;padding-bottom:.08em}
   footer p{max-width:none;display:flex;flex-wrap:wrap;gap:.25rem 2rem}
   footer p a{padding:.7rem 0;min-height:44px;display:inline-flex;align-items:center}
+  /* ---------- CV sections: skills, timeline, work grid, education, portfolio links ---------- */
+  .skills{display:grid;gap:clamp(1.5rem,3vw,2.5rem)}
+  .sk{display:grid;gap:.6rem;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+  @media(min-width:900px){.sk{grid-template-columns:6fr 5fr;align-items:baseline}.sk:hover{transform:translateX(1rem)}}
+  .sk h3{font-size:clamp(2rem,5.2vw,4.2rem);background:linear-gradient(180deg,#fff 25%,#8d8d8d);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sk p{font-size:1.25rem}
+  .tl{list-style:none;padding:0 0 0 2rem;position:relative}
+  .tl::before{content:"";position:absolute;left:5px;top:.9rem;bottom:.9rem;width:2px;background:linear-gradient(180deg,#fff,rgba(255,255,255,.12))}
+  .tl>li{position:relative;padding-bottom:3.5rem}
+  .tl>li:last-child{padding-bottom:0}
+  .tl>li::before{content:"";position:absolute;left:calc(-2rem + 0px);top:.7rem;width:12px;height:12px;border-radius:50%;background:#fff}
+  .tl>li:first-child::before{animation:pulse 2.2s ease-out infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}100%{box-shadow:0 0 0 16px rgba(255,255,255,0)}}
+  .tl h3{font-size:clamp(1.7rem,3.6vw,2.6rem);line-height:1}
+  .tl .when{color:#a8a8a8;font-weight:500;margin:.6rem 0 1rem}
+  .tl ul{padding-left:1.1rem;display:grid;gap:.5rem;max-width:52ch}
+  .roles b{display:block;font-size:1.5rem;letter-spacing:-.03em;line-height:1.2;margin-bottom:.25rem}
+  .grid.work{grid-template-columns:repeat(2,1fr)}
+  @media(min-width:900px){.grid.work{grid-template-columns:repeat(2,1fr)}.grid.work .fig:first-child{grid-column:span 2;aspect-ratio:2/1}}
+  .plink{display:block;font-weight:800;font-size:clamp(2.6rem,9vw,7.5rem);letter-spacing:-.055em;line-height:1;text-decoration:none;padding:.5rem 0 1rem;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+  .plink span{display:block;font-size:1rem;font-weight:500;letter-spacing:0;color:#a8a8a8;margin-top:.4rem}
+  .plink:hover{transform:translateX(1.2rem)}
+  @media(prefers-reduced-motion:reduce){.tl>li:first-child::before{animation:none}.sk:hover,.plink:hover{transform:none}}
   /* Entrance start states exist only once the script runs, so content never stays hidden */
   .js [data-r],.js .bt .w{opacity:0}
 </style>
@@ -174,41 +197,22 @@ window.SITE = {
   /* Photo of you for the About section (leave "" to hide it) */
   portrait: "",                              // <-- PUT IMAGE HERE, e.g. "images/me.jpg"
 
-  /* Feeds: the 3x3 grid. One line = one tile. */
-  feed: [
-    { label: "Reveal",  img: "" },           // <-- PUT IMAGE HERE
-    { label: "Staff",   img: "" },           // <-- PUT IMAGE HERE
-    { label: "Teaser",  img: "" },           // <-- PUT IMAGE HERE
-    { label: "Jambore", img: "" },           // <-- PUT IMAGE HERE
-    { label: "Paskah",  img: "" },           // <-- PUT IMAGE HERE
-    { label: "WE CUP",  img: "" },           // <-- PUT IMAGE HERE
-    { label: "ID card", img: "" },           // <-- PUT IMAGE HERE
-    { label: "Guide",   img: "" },           // <-- PUT IMAGE HERE
-    { label: "Story",   img: "" }            // <-- PUT IMAGE HERE
-  ],
-
-  /* Design: guidebook cover, ID card, lanyard (add or remove lines freely) */
-  design: [
-    { label: "Guidebook cover", img: "" },   // <-- PUT IMAGE HERE
-    { label: "ID card",         img: "" },   // <-- PUT IMAGE HERE
-    { label: "Lanyard",         img: "" }    // <-- PUT IMAGE HERE
-  ],
-
-  /* Photography */
-  photos: [
-    { label: "Committee Portrait, Jambore Rohani '26",    img: "" },  // <-- PUT IMAGE HERE
-    { label: "Event Documentation, Paskah UB '26",        img: "" },  // <-- PUT IMAGE HERE
-    { label: "Event Documentation, WE CUP FILKOM '26",    img: "" },  // <-- PUT IMAGE HERE
-    { label: "Committee Portrait, Paskah UB '26",         img: "" }   // <-- PUT IMAGE HERE
+  /* Selected work (from your CV). One line = one tile. Add or remove lines freely.
+     Optional per tile: ratio: "port" (tall) or "land" (wide). The first tile is shown larger on desktop. */
+  work: [
+    { label: "Committee Reveal feeds",          img: "" },   // <-- PUT IMAGE HERE
+    { label: "Staff ID cards",                  img: "", ratio: "port" },   // <-- PUT IMAGE HERE
+    { label: "Guidebook cover and background",  img: "", ratio: "port" },   // <-- PUT IMAGE HERE
+    { label: "Lanyards",                        img: "" },   // <-- PUT IMAGE HERE
+    { label: "Teaser videos",                   img: "" },   // <-- PUT IMAGE HERE
+    { label: "Event photography",               img: "" }    // <-- PUT IMAGE HERE
   ],
 
   /* Links: any button with data-link="name" gets its address from here ("" keeps it empty) */
   links: {
-    gdrive:   "",    // <-- PUT LINK HERE (Find more at my GDrive)
-    personal: "",    // <-- PUT LINK HERE
-    wecup:    "",    // <-- PUT LINK HERE
-    paskah:   "",    // <-- PUT LINK HERE
-    jambore:  ""     // <-- PUT LINK HERE
+    graphic: "",    // <-- PUT LINK HERE (Graphic Design portfolio)
+    web:     "",    // <-- PUT LINK HERE (Web Development portfolio)
+    data:    ""     // <-- PUT LINK HERE (Data Analytics portfolio)
   },
 
   /* DECORATIVE SHAPES
@@ -225,11 +229,12 @@ window.SITE = {
     { in: "#about", type: "twinkle", size: "clamp(30px,4vw,56px)",   left: "3%", bottom: "16%", twinkle: true },
     { in: ".marq",  type: "sparkle", size: "clamp(50px,8vw,120px)",  right: "6%", top: "8%", twinkle: true },
     { in: ".marq",  type: "asterisk",size: "clamp(40px,6vw,90px)",   left: "4%", bottom: "6%", spin: 40000, dir: -1 },
-    { in: "#work",  type: "asterisk",size: "clamp(60px,9vw,130px)",  left: "47%", bottom: "5%", spin: 45000, dir: -1, speed: .08 },
-    { in: "#work",  type: "twinkle", size: "clamp(30px,4vw,60px)",   right: "4%", top: "6%", twinkle: true },
+    { in: "#skills", type: "asterisk", size: "clamp(70px,10vw,150px)", right: "4%", bottom: "6%", spin: 55000, dir: -1 },
+    { in: "#experience", type: "twinkle", size: "clamp(30px,4vw,60px)", right: "5%", top: "7%", twinkle: true },
+    { in: "#work",  type: "asterisk",size: "clamp(60px,9vw,130px)",  left: "47%", bottom: "4%", spin: 45000, dir: -1, speed: .08 },
     { in: "section.paper:not(.proj)", type: "asterisk", size: "clamp(70px,10vw,150px)", right: "4%", top: "7%", spin: 55000 },
-    { in: "#contact", type: "burst",   size: "clamp(90px,14vw,200px)", left: "4%", top: "6%", spin: 60000, speed: .05 },
-    { in: "#contact", type: "sparkle", size: "clamp(40px,6vw,90px)",   right: "8%", bottom: "18%", twinkle: true }
+    { in: "#portfolio", type: "burst",   size: "clamp(90px,14vw,200px)", left: "4%", top: "6%", spin: 60000, speed: .05 },
+    { in: "#portfolio", type: "sparkle", size: "clamp(40px,6vw,90px)",   right: "8%", bottom: "14%", twinkle: true }
   ],
   stars: 18,   /* tiny twinkling stars in the background (0 = none) */
 
@@ -241,28 +246,27 @@ window.SITE = {
 <div class="aurora" aria-hidden="true"><div class="au a1"></div><div class="au a2"></div><div class="au a3"></div></div>
 <div class="prog" id="prog" aria-hidden="true"></div><div class="cursor" id="cursor" aria-hidden="true"></div>
 
-<nav class="bar" aria-label="Main"><b>Rafael</b><a class="mag sc" href="#about">About</a><a class="mag sc" href="#work">Work</a><a class="mag sc" href="#contact">Contact</a></nav>
+<nav class="bar" aria-label="Main"><b>Rafael</b><a class="mag sc" href="#experience">Experience</a><a class="mag sc" href="#work">Work</a><a class="mag sc" href="#portfolio">Portfolio</a></nav>
 
 <!-- ============================ HERO ============================ -->
 <header class="hero" id="top">
-  <h1 id="h1" aria-label="Rafael's Portfolio"><span class="line" id="l1" aria-hidden="true">Rafael's</span><span class="line" id="l2" aria-hidden="true">Portfolio</span></h1>
+  <h1 id="h1" aria-label="Rafael Mahesa Bayu Raditya"><span class="line" id="l1" aria-hidden="true">Rafael Mahesa</span><span class="line" id="l2" aria-hidden="true">Bayu Raditya</span></h1>
   <div class="hero-meta">
     <div data-r>
-      <!-- EDIT: COPY (rotating words are in the script: search "ROTATING WORDS") -->
-      <p class="rot">I make <span class="rwrap"><span id="rw">feeds</span></span></p>
-      <p class="shine">Information Systems student, graphic designer and storyteller behind the feed.</p>
-      <blockquote>“With great power comes great responsibility”</blockquote>
+      <!-- EDIT: COPY (the rotating phrases are in the script: search "ROTATING WORDS") -->
+      <p class="rot">I <span class="rwrap"><span id="rw">design feeds</span></span></p>
+      <p class="shine">Information Systems undergraduate at Brawijaya University with over four years of graphic design behind me.</p>
     </div>
     <div class="who" data-r>
       <a class="btn mag" href="mailto:m.bayu1405@gmail.com">Email me</a>
-      <a href="https://instagram.com/rxfxxl.m" target="_blank" rel="noopener">@rxfxxl.m</a>
       <a href="https://linkedin.com/in/rafael-mahesa-bayu-raditya" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://github.com/RAFAELSFIX10SMBR" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://instagram.com/rxfxxl.m" target="_blank" rel="noopener">@rxfxxl.m</a>
     </div>
   </div>
 </header>
 
-<!-- ============================ ABOUT ============================ -->
+<!-- ============================ PROFILE ============================ -->
 <section class="step" id="about">
   <div class="in two">
     <div>
@@ -270,9 +274,10 @@ window.SITE = {
       <figure class="portrait" id="portrait" hidden></figure>  <!-- filled from SITE.portrait -->
     </div>
     <div>
-      <!-- EDIT: COPY -->
-      <p data-sr>I've always been drawn to designing Instagram feeds with a modern, polished look, and it's the thing I'm genuinely best at. My experience comes from three committees in design, documentation and multimedia, one of which I led, which gave me a taste of both creative direction and hands-on execution.</p>
-      <p data-r style="margin-top:1.5rem">I pull assets from Canva, gather inspiration from Pinterest and bring it together in Figma. That rhythm of gathering, experimenting and refining keeps me hooked on design.</p>
+      <!-- EDIT: COPY (from your CV profile) -->
+      <p data-sr>I'm an Information Systems undergraduate with over four years of graphic design experience and a growing foundation in data science, analytics and machine learning. I've contributed to and led design, documentation and multimedia work across several university committees and organizations, most recently coordinating the media and information team for an event committee.</p>
+      <p data-r style="margin-top:1.5rem">I combine a strong visual eye with technical curiosity, and I keep taking on more leadership responsibility, evaluating and improving from one project to the next.</p>
+      <p data-r style="margin-top:1.5rem">Based in Malang, East Java, Indonesia.</p>
     </div>
   </div>
 </section>
@@ -282,95 +287,96 @@ window.SITE = {
   <div class="in stats">
     <!-- EDIT: data-to is the number, data-suffix is what follows it -->
     <div data-r><span class="num" data-to="4" data-suffix="+">4+</span><p>years of graphic design experience</p></div>
-    <div data-r><span class="num" data-to="3" data-suffix="">3</span><p>committees across design, documentation and multimedia</p></div>
-    <div data-r><span class="num" data-to="1" data-suffix="">1</span><p>media and information team led as coordinator</p></div>
+    <div data-r><span class="num" data-to="3" data-suffix="">3</span><p>event committees where I designed, documented or led media</p></div>
+    <div data-r><span class="num" data-to="2" data-suffix="">2</span><p>organizations: Google Developer Groups on Campus and UAKKAT</p></div>
   </div>
 </section>
 
-<!-- ============================ SERVICES MARQUEE ============================ -->
-<div class="paper marq" style="margin-top:var(--gap)" aria-label="Photography, Video Editing, Posters, Feeds, Documentation">
-  <div class="row" id="r1" aria-hidden="true"><span>Photography</span><span>Video Editing</span><span>Posters</span><span>Feeds</span><span>Documentation</span><span>Photography</span><span>Video Editing</span><span>Posters</span><span>Feeds</span><span>Documentation</span></div>
-  <div class="row alt" id="r2" aria-hidden="true"><span>Documentation</span><span>Feeds</span><span>Posters</span><span>Video Editing</span><span>Photography</span><span>Documentation</span><span>Feeds</span><span>Posters</span><span>Video Editing</span><span>Photography</span></div>
+<!-- ============================ MARQUEE ============================ -->
+<div class="paper marq" style="margin-top:var(--gap)" aria-label="Graphic design, Photography, Video editing, Front-end, Machine learning, Data analytics">
+  <div class="row" id="r1" aria-hidden="true"><span>Graphic design</span><span>Photography</span><span>Video editing</span><span>Front-end</span><span>Machine learning</span><span>Data analytics</span><span>Graphic design</span><span>Photography</span><span>Video editing</span><span>Front-end</span><span>Machine learning</span><span>Data analytics</span></div>
+  <div class="row alt" id="r2" aria-hidden="true"><span>Data analytics</span><span>Machine learning</span><span>Front-end</span><span>Video editing</span><span>Photography</span><span>Graphic design</span><span>Data analytics</span><span>Machine learning</span><span>Front-end</span><span>Video editing</span><span>Photography</span><span>Graphic design</span></div>
 </div>
 
-<section>
-  <div class="in two">
-    <div><h2 class="bt" style="margin-bottom:0">What can I make for you</h2><button class="qq" id="qq" aria-label="Celebrate">??</button></div>
-    <p data-r>I can build a visual identity from scratch for an event or organization: guidebook covers and layouts, ID cards, lanyards, and social media content for reveals and announcements, mostly in Figma and Canva. I also edit teaser and promotional videos that build anticipation and tie the identity together across formats. What matters most to me is consistency: colors, typography and tone unified across every piece, so the result feels like one brand and not a collection of random pieces.</p>
+<!-- ============================ MAIN SKILLS ============================ -->
+<section class="step" id="skills">
+  <div class="in">
+    <h2 class="bt">Main skills</h2>
+    <!-- EDIT: COPY (from your CV) -->
+    <div class="skills">
+      <div class="sk" data-r><h3>Front-end programming</h3><p>HTML, CSS, PHP, SQL and the Laravel framework</p></div>
+      <div class="sk" data-r><h3>Machine learning fundamentals</h3><p>Data cleaning, preprocessing, pipeline modeling and computer vision</p></div>
+      <div class="sk" data-r><h3>Graphic design</h3><p>Figma, Canva and other external design tools</p></div>
+      <div class="sk" data-r><h3>Photography and editing</h3><p>Event photography, plus photo and video editing for media campaigns</p></div>
+    </div>
   </div>
 </section>
 
-<!-- ============================ PROJECTS ============================ -->
+<!-- ============================ EXPERIENCE (a real sequence, so a timeline) ============================ -->
+<section id="experience">
+  <div class="in two">
+    <h2 class="bt">Experience</h2>
+    <ol class="tl">
+      <li data-r>
+        <h3>Coordinator of Media and Information</h3>
+        <p class="when">Jambore Rohani UAKKAT, 2026 to present</p>
+        <ul><li>Led and supervised a team responsible for the event's media and information output</li><li>Photographed content for Committee Reveal feeds and staff ID cards</li><li>Designed graphics for the Committee Reveal social media feeds</li><li>Edited and produced the event's teaser video</li></ul>
+      </li>
+      <li data-r>
+        <h3>Staff, Design and Multimedia</h3>
+        <p class="when">Paskah UB, April to May 2026</p>
+        <ul><li>Photographed content for Committee Reveal feeds and staff ID cards</li><li>Designed graphics for the Committee Reveal social media feeds</li><li>Documented event activities through photography</li></ul>
+      </li>
+      <li data-r>
+        <h3>Staff, Design and Multimedia</h3>
+        <p class="when">Women Empowerment Cup, FILKOM, March to May 2026</p>
+        <ul><li>Designed the event guidebook's cover and background, plus staff ID cards and lanyards</li><li>Edited and produced the event's teaser video</li></ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ SELECTED WORK (image slots) ============================ -->
 <section class="step proj" id="work">
   <div class="in">
-    <div><h3 class="bt">Feeds</h3>
-      <p data-r style="margin-top:1.5rem">I've designed reveal feeds and social media content for multiple committees, shaping how an audience forms its first impression of a team or event. It taught me how much a feed's visual consistency influences whether people engage further.</p>
-      <p class="links" data-r style="margin-top:1rem">Find more at <a href="https://instagram.com/uakkatub" target="_blank" rel="noopener">@uakkatub</a>, <a href="https://instagram.com/jamborerohani2026" target="_blank" rel="noopener">@jamborerohani2026</a> and <a href="https://instagram.com/paskahub2026" target="_blank" rel="noopener">@paskahub2026</a> on IG</p></div>
-    <div class="grid feed" data-slot="feed"></div>   <!-- filled from SITE.feed -->
+    <div><h2 class="bt">Selected work</h2>
+      <!-- EDIT: COPY -->
+      <p data-r>Reveal feeds, ID cards, a guidebook, lanyards, teaser videos and event photography, made for Jambore Rohani, Paskah UB and WE CUP FILKOM.</p>
+      <p style="margin-top:1.5rem" data-r><a class="btn mag" href="#" data-link="graphic">View graphic design portfolio</a></p></div>
+    <div class="grid work" data-slot="work"></div>   <!-- filled from SITE.work -->
   </div>
 </section>
 
-<section class="proj">
-  <div class="in">
-    <h3 class="bt">Design</h3>
-    <div><p data-r>Design is the core of my committee work, from guidebook covers and ID cards to lanyards, all built around one visual identity. Each project sharpened my ability to make individual pieces feel like part of a cohesive brand rather than standalone designs.</p>
-      <p style="margin-top:1.5rem" data-r><a class="btn mag" href="#" data-link="gdrive">Find more at my GDrive</a></p>
-      <div class="grid design" data-slot="design"></div>   <!-- filled from SITE.design -->
-    </div>
-  </div>
-</section>
-
-<section class="step proj">
-  <div class="in">
-    <div><h3 class="bt">Photography</h3>
-      <p data-r style="margin-top:1.5rem">I've handled event photography and full documentation across committees: ID card shots, reveal feed content, and an entire event from start to finish. It taught me to balance polished, intentional shots with staying alert enough to capture moments as they unfold.</p></div>
-    <div class="grid photos" data-slot="photos"></div>   <!-- filled from SITE.photos -->
-  </div>
-</section>
-
-<section class="paper proj">
-  <div class="in" style="grid-template-columns:1fr">
-    <h3 class="bt">Miscellaneous</h3>
-    <!-- EDIT: add or remove <li> lines; hover a word to see it ripple -->
-    <ul class="menu"><li data-r>Lanyard Design</li><li data-r>IG Story Frame</li><li data-r>Animated Teaser Video</li><li data-r>Guidebook Cover and BG</li><li data-r>Gform Header</li><li data-r>ID Card Design</li></ul>
-  </div>
-</section>
-
-<section>
-  <div class="in two">
-    <h2 class="bt">I've done projects together with</h2>
-    <ul class="roles">
-      <li data-r>Staff of Design, Documentation and Multimedia at Paskah UB 2026</li>
-      <li data-r>Staff of Design, Documentation and Multimedia at WE CUP FILKOM 2026</li>
-      <li data-r>Currently Coordinator of Media and Information at Jambore Rohani 2026</li>
-      <li data-r>Staff of the Month of Unit Aktivitas Kerohanian Katolik, June 2026</li>
-    </ul>
-  </div>
-</section>
-
+<!-- ============================ EDUCATION AND ORGANIZATIONS ============================ -->
 <section class="paper">
   <div class="in two">
-    <div><h2 class="bt">Why do you need me?</h2>
-      <ul class="vals"><li data-r>Proactivity</li><li data-r>Curiosity</li><li data-r>Authenticity</li><li data-r>Continuous Growth</li><li data-r>Dedicated</li></ul></div>
-    <p data-sr>I work hard because I'm consistent, accountable and always looking to improve. In every committee I've joined, I've done more than what was asked, taking on video editing or fully documenting an event on top of my core role. That carried into my coordinator position, where I took responsibility for the team's results, set clear direction and held everyone's work to the same standard as my own. I reflect after each project on what to improve, so the next one is better than the last.</p>
+    <div><h2 class="bt">Education</h2>
+      <ul class="roles">
+        <li data-r><b>Brawijaya University</b>Undergraduate of Information Systems, 2025 to present</li>
+        <li data-r><b>Saint Joseph College Catholic Senior High School</b>2022 to 2025</li>
+      </ul></div>
+    <div><h2 class="bt">Organizations</h2>
+      <ul class="roles">
+        <li data-r><b>Core Team, Media Creative Division</b>Google Developer Groups on Campus, 2026 to present</li>
+        <li data-r><b>Media and Information Division</b>Unit Aktivitas Kerohanian Katolik (UAKKAT), 2026 to present</li>
+      </ul></div>
   </div>
 </section>
 
-<section class="step" id="contact">
+<!-- ============================ PORTFOLIO LINKS ============================ -->
+<section class="step" id="portfolio">
   <div class="in">
-    <h2 class="bt">Discover more!</h2>
-    <div class="cols">
-      <div class="col spot" data-r><h3>Personal work</h3><a href="#" data-link="personal">Personal</a></div>
-      <div class="col spot" data-r><h3>Committee work</h3><a href="#" data-link="wecup">WE CUP</a><a href="#" data-link="paskah">Paskah UB</a><a href="#" data-link="jambore">Jambore</a></div>
-      <div class="col spot" data-r><h3>Organization work</h3><a href="https://instagram.com/uakkatub" target="_blank" rel="noopener">UAKKAT</a><a href="https://instagram.com/jamborerohani2026" target="_blank" rel="noopener">Jambore IG</a><a href="https://instagram.com/paskahub2026" target="_blank" rel="noopener">Paskah UB IG</a></div>
-    </div>
+    <h2 class="bt">Portfolio</h2>
+    <a class="plink" href="#" data-link="graphic" data-r>Graphic Design<span>View portfolio</span></a>
+    <a class="plink" href="#" data-link="web" data-r>Web Development<span>View portfolio</span></a>
+    <a class="plink" href="#" data-link="data" data-r>Data Analytics<span>View portfolio</span></a>
   </div>
 </section>
 
 <footer>
   <div class="in">
-    <div class="name" id="name" aria-label="Rafael Mahesa Bayu Raditya">Rafael Mahesa Bayu Raditya</div>
-    <p><a href="mailto:m.bayu1405@gmail.com">m.bayu1405@gmail.com</a><a href="tel:+628179131998">+62-817-9131-998</a><a href="https://instagram.com/rxfxxl.m" target="_blank" rel="noopener">@rxfxxl.m</a></p>
+    <div class="name" id="name" aria-label="Let's work together">Let's work together</div>
+    <p><a class="btn" href="mailto:m.bayu1405@gmail.com">m.bayu1405@gmail.com</a><a href="tel:+628179131998">+62 817-9131-998</a><a href="https://linkedin.com/in/rafael-mahesa-bayu-raditya" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/RAFAELSFIX10SMBR" target="_blank" rel="noopener">GitHub</a><a href="https://instagram.com/rxfxxl.m" target="_blank" rel="noopener">@rxfxxl.m</a></p>
   </div>
 </footer>
 
@@ -382,16 +388,16 @@ window.SITE = {
   var S=window.SITE;
   function figure(item,cls,reveal,speed){
     var f=document.createElement('figure');
-    f.className='fig '+cls+' tilt spot'+(item.img?' has-img':'');
+    f.className='fig '+(item.ratio||cls)+' tilt spot'+(item.img?' has-img':'');
     if(reveal) f.setAttribute('data-r','');
     if(speed) f.setAttribute('data-speed',speed);
     if(item.img){var im=new Image();im.src=item.img;im.alt=item.label;im.loading='lazy';f.appendChild(im);}
     var c=document.createElement('figcaption');c.textContent=item.label;f.appendChild(c);return f;
   }
   var speeds=[.07,-.05,.1,-.03];
-  [['feed','sq',false],['design','port',true],['photos','land',true]].forEach(function(k){
+  [['work','sq',true]].forEach(function(k){
     var box=document.querySelector('[data-slot="'+k[0]+'"]'); if(!box) return;
-    (S[k[0]]||[]).forEach(function(it,i){box.appendChild(figure(it,k[1],k[2],k[0]==='feed'?0:speeds[i%4]));});
+    (S[k[0]]||[]).forEach(function(it,i){box.appendChild(figure(it,k[1],k[2],speeds[i%4]));});
   });
   /* Shapes: SVG marks placed from SITE.shapes. Gradient fills are defined once below. */
   if((S.motion||{}).shapes!==false){
@@ -459,8 +465,8 @@ window.SITE = {
     p.innerHTML='<div class="pre-n"><span id="pn">0</span>%</div><div class="pre-t">Rafael Mahesa Bayu Raditya</div>';
     document.body.appendChild(p);document.body.style.overflow='hidden';
     var st={v:0},pn=document.getElementById('pn');
-    anime({targets:st,v:100,round:1,duration:1500,easing:'easeInOutQuad',update:function(){pn.textContent=st.v;},complete:function(){
-      anime({targets:p,translateY:'-100%',duration:900,easing:'easeInOutQuart',complete:function(){p.remove();document.body.style.overflow='';}});
+    anime({targets:st,v:100,round:1,duration:900,easing:'easeInOutQuad',update:function(){pn.textContent=st.v;},complete:function(){
+      anime({targets:p,translateY:'-100%',duration:700,easing:'easeInOutQuart',complete:function(){p.remove();document.body.style.overflow='';}});
       done();
     }});
   }
@@ -486,7 +492,7 @@ window.SITE = {
   });
 
   /* ---------- 3. ROTATING WORDS (edit the list) ---------- */
-  var list=['feeds','teaser videos','ID cards','guidebooks','portraits','lanyards'],wi=0,rw=document.getElementById('rw');
+  var list=['design feeds','edit teaser videos','build with Laravel','clean data','take event photos','lead media teams'],wi=0,rw=document.getElementById('rw');
   setInterval(function(){
     anime({targets:rw,translateY:[0,'-70%'],opacity:[1,0],duration:260,easing:'easeInQuad',complete:function(){
       wi=(wi+1)%list.length;rw.textContent=list[wi];
@@ -516,12 +522,6 @@ window.SITE = {
     },{threshold:.6}).observe(n);
   });
 
-  /* ---------- 7. FEED tiles pop in from the centre ---------- */
-  var tiles=document.querySelectorAll('[data-slot="feed"] .fig');tiles.forEach(function(t){t.style.opacity=0;});
-  var feed=document.querySelector('[data-slot="feed"]');
-  if(feed) new IntersectionObserver(function(en,o){ if(!en[0].isIntersecting) return;o.disconnect();
-    anime({targets:tiles,opacity:[0,1],scale:[.5,1],rotate:[-14,0],duration:800,delay:anime.stagger(80,{grid:[3,3],from:'center'}),easing:'easeOutBack'});
-  },{threshold:.3}).observe(feed);
 
   /* ---------- 7b. SHAPES: pop in once, then spin slowly and/or twinkle ---------- */
   function twinkle(el,base){
@@ -539,7 +539,7 @@ window.SITE = {
   var rows=[{el:document.getElementById('r1'),dir:-1,x:0},{el:document.getElementById('r2'),dir:1,x:0}],lastY=scrollY,vel=0;
   rows[1].x=-rows[1].el.scrollWidth/2;
   var par=[].slice.call(document.querySelectorAll('[data-speed]'));
-  var srs=[].slice.call(document.querySelectorAll('[data-sr]')).map(function(p){var ws=words(p);ws.forEach(function(s){s.style.opacity=.3;s.style.transition='opacity .25s';});return{p:p,ws:ws,n:-1};});
+  var srs=[].slice.call(document.querySelectorAll('[data-sr]')).map(function(p){var ws=words(p);ws.forEach(function(s){s.style.opacity=.45;s.style.transition='opacity .25s';});return{p:p,ws:ws,n:-1};});
   var h1=document.getElementById('h1'),au=[].slice.call(document.querySelectorAll('.au')),prog=document.getElementById('prog');
   (function tick(){
     var y=scrollY;vel+=((y-lastY)-vel)*.12;lastY=y;
@@ -552,7 +552,7 @@ window.SITE = {
     }
     if(y<vh){h1.style.translate='0 '+(y*.28)+'px';h1.style.opacity=Math.max(0,1-y/(vh*.85));}
     srs.forEach(function(o){var r=o.p.getBoundingClientRect(),pg=Math.min(1,Math.max(0,(vh*.9-r.top)/(r.height+vh*.25))),n=Math.round(pg*o.ws.length);
-      if(n!==o.n){o.ws.forEach(function(s,i){s.style.opacity=i<n?1:.3;});o.n=n;}});
+      if(n!==o.n){o.ws.forEach(function(s,i){s.style.opacity=i<n?1:.45;});o.n=n;}});
     prog.style.transform='scaleX('+(y/(H.scrollHeight-vh||1))+')';
     requestAnimationFrame(tick);
   })();
@@ -562,25 +562,13 @@ window.SITE = {
   new IntersectionObserver(function(en,o){ if(!en[0].isIntersecting) return;o.disconnect();scramble(nm,final,1600);},{threshold:.5}).observe(nm);
   if(fine) document.querySelectorAll('.sc').forEach(function(a){var t=a.textContent;a.addEventListener('pointerenter',function(){scramble(a,t,450);});});
 
-  /* ---------- 10. MISC menu: letters ripple on hover ---------- */
-  document.querySelectorAll('.menu li').forEach(function(li){
-    var split=false;
-    li.addEventListener('pointerenter',function(){
-      if(!split){var t=li.textContent;li.setAttribute('aria-label',t);li.textContent='';t.split('').forEach(function(c){var s=document.createElement('span');s.className='c';s.setAttribute('aria-hidden','true');s.textContent=c===' '?'\u00a0':c;li.appendChild(s);});split=true;}
-      anime({targets:li.querySelectorAll('.c'),translateY:[0,-14,0],duration:550,delay:anime.stagger(28),easing:'easeInOutQuad'});
-    });
-  });
-
-  /* ---------- 11. CLICK SPARK (bigger burst on the ??) ---------- */
+  /* ---------- 11. CLICK SPARK ---------- */
   function burst(x,y,n,dist){
     for(var i=0;i<n;i++){var s=document.createElement('span');s.className='spark';s.style.left=x+'px';s.style.top=y+'px';document.body.appendChild(s);
       var a=Math.PI*2*i/n+Math.random()*.4,d=dist*(.6+Math.random()*.6);
       anime({targets:s,translateX:Math.cos(a)*d,translateY:Math.sin(a)*d,scale:[1,0],opacity:[1,0],duration:700,easing:'easeOutQuad',complete:function(an){an.animatables[0].target.remove();}});}
   }
   addEventListener('click',function(e){burst(e.clientX,e.clientY,8,46);});
-  var qq=document.getElementById('qq');
-  qq.addEventListener('click',function(e){e.stopPropagation();var r=qq.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,28,160);
-    anime({targets:qq,rotate:[0,-6,6,-3,0],scale:[1,1.12,1],duration:700,easing:'easeInOutBack'});});
 
   /* ---------- 12. POINTER-ONLY: spotlight, tilt, magnet, cursor, trail ---------- */
   if(!fine) return;
