@@ -130,7 +130,7 @@
   .fig{position:relative;overflow:hidden;display:flex;align-items:flex-end;background:linear-gradient(145deg,#303030,#121212);border-radius:14px;transform-style:preserve-3d;will-change:transform}
   .fig.sq{aspect-ratio:1} .fig.port{aspect-ratio:4/5} .fig.land{aspect-ratio:4/3}
   .fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .fig figcaption{position:relative;z-index:1;padding:.9rem;font-weight:700;letter-spacing:-.02em;font-size:clamp(.95rem,1.8vw,1.25rem);width:100%}
+  .fig figcaption{position:relative;z-index:3;padding:.9rem;font-weight:700;letter-spacing:-.02em;font-size:clamp(.95rem,1.8vw,1.25rem);width:100%}
   .fig.has-img figcaption{padding-top:2.5rem;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.7))}
   .fig:not(.has-img):nth-child(3n+1){background:linear-gradient(145deg,#fff,#c9c9c9);color:var(--paper-ink)}
   .fig:not(.has-img):nth-child(4n){background:linear-gradient(145deg,#757575,#262626);color:#fff}
@@ -158,6 +158,12 @@
   .name{font-weight:800;font-size:clamp(3rem,10.5vw,10rem);letter-spacing:-.06em;line-height:.9;margin-bottom:3rem;padding-bottom:.08em}
   footer p{max-width:none;display:flex;flex-wrap:wrap;gap:.25rem 2rem}
   footer p a{padding:.7rem 0;min-height:44px;display:inline-flex;align-items:center}
+  /* Vertical side title, like the section titles in the portfolio (desktop only) */
+  .vert{display:none}
+  @media(min-width:1100px){
+    .vert{display:block;position:absolute;left:clamp(.5rem,1.5vw,1.5rem);top:var(--gap);writing-mode:vertical-rl;transform:rotate(180deg);font-weight:800;font-size:clamp(2rem,3.4vw,3rem);letter-spacing:-.04em;line-height:1;color:#a8a8a8;z-index:1}
+    #work .in{padding-left:clamp(0px,5vw,4.5rem)}
+  }
   /* ---------- CV sections: skills, timeline, work grid, education, portfolio links ---------- */
   .skills{display:grid;gap:clamp(1.5rem,3vw,2.5rem)}
   .sk{display:grid;gap:.6rem;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
@@ -239,11 +245,11 @@ window.SITE = {
   stars: 18,   /* tiny twinkling stars in the background (0 = none) */
 
   /* MOTION SWITCHES: set any to false to turn it off */
-  motion: { preloader: true, cursor: true, trail: true, aurora: true, parallax: true, shapes: true }
+  motion: { preloader: true, cursor: true, trail: true, parallax: true, shapes: true }
 };
 </script>
 
-<div class="aurora" aria-hidden="true"><div class="au a1"></div><div class="au a2"></div><div class="au a3"></div></div>
+<div class="aurora" aria-hidden="true"></div>
 <div class="prog" id="prog" aria-hidden="true"></div><div class="cursor" id="cursor" aria-hidden="true"></div>
 
 <nav class="bar" aria-label="Main"><b>Rafael</b><a class="mag sc" href="#experience">Experience</a><a class="mag sc" href="#work">Work</a><a class="mag sc" href="#portfolio">Portfolio</a></nav>
@@ -293,10 +299,19 @@ window.SITE = {
 </section>
 
 <!-- ============================ MARQUEE ============================ -->
-<div class="paper marq" style="margin-top:var(--gap)" aria-label="Graphic design, Photography, Video editing, Front-end, Machine learning, Data analytics">
-  <div class="row" id="r1" aria-hidden="true"><span>Graphic design</span><span>Photography</span><span>Video editing</span><span>Front-end</span><span>Machine learning</span><span>Data analytics</span><span>Graphic design</span><span>Photography</span><span>Video editing</span><span>Front-end</span><span>Machine learning</span><span>Data analytics</span></div>
-  <div class="row alt" id="r2" aria-hidden="true"><span>Data analytics</span><span>Machine learning</span><span>Front-end</span><span>Video editing</span><span>Photography</span><span>Graphic design</span><span>Data analytics</span><span>Machine learning</span><span>Front-end</span><span>Video editing</span><span>Photography</span><span>Graphic design</span></div>
+<div class="paper marq" style="margin-top:var(--gap)" aria-label="Photography, Video editing, Posters, Feeds, Documentation">
+  <div class="row" id="r1" aria-hidden="true"><span>Photography</span><span>Video editing</span><span>Posters</span><span>Feeds</span><span>Documentation</span><span>Photography</span><span>Video editing</span><span>Posters</span><span>Feeds</span><span>Documentation</span></div>
+  <div class="row alt" id="r2" aria-hidden="true"><span>Documentation</span><span>Feeds</span><span>Posters</span><span>Video editing</span><span>Photography</span><span>Documentation</span><span>Feeds</span><span>Posters</span><span>Video editing</span><span>Photography</span></div>
 </div>
+
+<!-- ============================ WHAT CAN I MAKE FOR YOU?? (tap the ??) ============================ -->
+<section>
+  <div class="in two">
+    <div><h2 class="bt" style="margin-bottom:0">What can I make for you</h2><button class="qq" id="qq" aria-label="Celebrate">??</button></div>
+    <!-- EDIT: COPY -->
+    <p data-r>Guidebook covers, ID cards, lanyards, reveal feeds, teaser videos and event photography. What matters most to me is consistency: colors, typography and tone unified across every piece, so the result feels like one brand.</p>
+  </div>
+</section>
 
 <!-- ============================ MAIN SKILLS ============================ -->
 <section class="step" id="skills">
@@ -338,6 +353,7 @@ window.SITE = {
 
 <!-- ============================ SELECTED WORK (image slots) ============================ -->
 <section class="step proj" id="work">
+  <span class="vert" aria-hidden="true">Projects I've done</span>
   <div class="in">
     <div><h2 class="bt">Selected work</h2>
       <!-- EDIT: COPY -->
@@ -366,7 +382,7 @@ window.SITE = {
 <!-- ============================ PORTFOLIO LINKS ============================ -->
 <section class="step" id="portfolio">
   <div class="in">
-    <h2 class="bt">Portfolio</h2>
+    <h2 class="bt">Discover more!</h2>
     <a class="plink" href="#" data-link="graphic" data-r>Graphic Design<span>View portfolio</span></a>
     <a class="plink" href="#" data-link="web" data-r>Web Development<span>View portfolio</span></a>
     <a class="plink" href="#" data-link="data" data-r>Data Analytics<span>View portfolio</span></a>
@@ -500,11 +516,6 @@ window.SITE = {
     }});
   },2400);
 
-  /* ---------- 4. AURORA drifts ---------- */
-  if(M.aurora!==false) [['.a1',140,90,14000],['.a2',-120,-80,17000],['.a3',-90,60,20000]].forEach(function(a){
-    anime({targets:a[0],translateX:a[1],translateY:a[2],scale:[1,1.18],duration:a[3],direction:'alternate',loop:true,easing:'easeInOutSine'});
-  });
-
   /* ---------- 5. HEADINGS blur in word by word; everything else rises ---------- */
   document.querySelectorAll('.bt').forEach(function(h){var t=h.textContent;h.setAttribute('aria-label',t);words(h,'w').forEach(function(s){s.setAttribute('aria-hidden','true');s.textContent=s.textContent.replace(/ $/,'\u00a0');});});
   var io=new IntersectionObserver(function(en){en.forEach(function(e){
@@ -569,6 +580,8 @@ window.SITE = {
       anime({targets:s,translateX:Math.cos(a)*d,translateY:Math.sin(a)*d,scale:[1,0],opacity:[1,0],duration:700,easing:'easeOutQuad',complete:function(an){an.animatables[0].target.remove();}});}
   }
   addEventListener('click',function(e){burst(e.clientX,e.clientY,8,46);});
+  var qq=document.getElementById('qq');
+  qq.addEventListener('click',function(e){e.stopPropagation();var r=qq.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,28,160);anime({targets:qq,rotate:[0,-6,6,-3,0],scale:[1,1.12,1],duration:700,easing:'easeInOutBack'});});
 
   /* ---------- 12. POINTER-ONLY: spotlight, tilt, magnet, cursor, trail ---------- */
   if(!fine) return;
