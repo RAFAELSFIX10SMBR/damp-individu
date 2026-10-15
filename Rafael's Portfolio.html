@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<!--
+=====================================================================================
+  HOW TO EDIT THIS SITE  (search for the banner names below with Ctrl/Cmd + F)
+=====================================================================================
+  1. "EDIT ME: IMAGES AND LINKS"  -> put your images and links in ONE place (top of <body>)
+  2. "STYLE 1: COLORS"           -> change the colors / gradients
+  3. "STYLE 2: FONTS"            -> change the font
+  4. "EDIT: COPY"                -> comments in the HTML mark every text you may want to rewrite
+  5. "MOTION SWITCHES"           -> turn animations on/off (inside EDIT ME block)
+  Images: each image goes in the SITE object as   img: "images/your-file.jpg"
+          (use a path if you host the files yourself, or a data: URI for a single-file page)
+=====================================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rafael's Portfolio</title>
+<!-- STYLE 2: FONTS -> swap the family name here AND in --font below -->
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<style>
+  /* ============================== STYLE 1: COLORS ============================== */
+  :root{
+    --ground:#0a0a0a;            /* page background */
+    --ink:#f4f4f4;               /* text on dark */
+    --paper:#f4f4f4;             /* light sections */
+    --paper-ink:#0a0a0a;         /* text on light sections */
+    --g1:#ffffff; --g2:#9a9a9a; --g3:#2a2a2a;   /* gradient stops (try colors here) */
+    /* ============================== STYLE 2: FONTS ============================== */
+    --font:"Geist",system-ui,sans-serif;
+    /* ============================== SPACING ============================== */
+    --m:clamp(1.25rem,4vw,2.5rem);               /* side margin */
+    --gap:clamp(6rem,14vw,12rem);                /* space between sections */
+    color-scheme:dark; box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit;margin:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--ground);color:var(--ink);font:400 1.125rem/1.55 var(--font);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  a{color:inherit} p{max-width:60ch}
+  a:focus-visible,button:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+  section{padding:var(--gap) var(--m);position:relative}
+  .in{max-width:1280px;margin:0 auto}
+
+  /* ---------- Backdrop: aurora + grain + progress + cursor ---------- */
+  .aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(120% 80% at 50% 0%,#1b1b1b,var(--ground) 60%)}
+  .au{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform,translate}
+  .a1{width:55vw;height:55vw;left:-10vw;top:-15vw;background:radial-gradient(circle,rgba(255,255,255,.34),transparent 65%)}
+  .a2{width:48vw;height:48vw;right:-12vw;top:25vh;background:radial-gradient(circle,rgba(190,190,190,.26),transparent 65%)}
+  .a3{width:60vw;height:60vw;left:20vw;bottom:-30vw;background:radial-gradient(circle,rgba(120,120,120,.30),transparent 65%)}
+  body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>")}
+  .prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--g3),var(--g1))}
+  .cursor{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:80;opacity:0}
+  .dot{position:fixed;width:9px;height:9px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:79}
+  .spark{position:fixed;width:6px;height:6px;border-radius:50%;background:#fff;pointer-events:none;z-index:90}
+  /* ---------- Decorative shapes (asterisk, sparkle, twinkle, burst). Edit them in SITE.shapes ---------- */
+  .hero{position:relative}
+  .hero>*,.in{position:relative;z-index:1}
+  .marq .row{position:relative;z-index:1}
+  .shape{position:absolute;z-index:0;pointer-events:none;display:block;will-change:transform,opacity}
+  .shape svg{display:block;width:100%;height:100%;overflow:visible}
+  .pre{position:fixed;inset:0;z-index:100;background:var(--ground);display:flex;flex-direction:column;justify-content:flex-end;padding:var(--m)}
+  .pre-n{font-weight:800;font-size:clamp(6rem,24vw,20rem);letter-spacing:-.06em;line-height:.8;background:linear-gradient(180deg,#fff 25%,#8d8d8d);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .pre-t{margin-top:1rem;color:#9a9a9a}
+
+  /* ---------- Section fields ---------- */
+  .step{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015))}
+  .paper{background:linear-gradient(160deg,#ffffff,#d6d6d6);color:var(--paper-ink)}
+
+  /* ---------- Type ---------- */
+  h1,h2,h3{font-weight:700;letter-spacing:-.045em;line-height:.92}
+  h2{font-size:clamp(2.6rem,7.5vw,6.5rem);margin-bottom:clamp(2rem,5vw,4rem);max-width:12ch}
+  h3{font-size:clamp(2rem,4.5vw,3.5rem)}
+  h2,.proj h3,.qq,.name,.num{background:linear-gradient(180deg,#fff 25%,#8d8d8d);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .paper h2,.paper h3{background:linear-gradient(180deg,#0a0a0a 25%,#5c5c5c);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .bt .w{display:inline-block;background:inherit;-webkit-background-clip:text;background-clip:text}
+  .two{display:grid;gap:2.5rem}
+  @media(min-width:900px){.two{grid-template-columns:1fr 1fr;align-items:start}}
+
+  .bar{position:absolute;top:0;left:0;right:0;display:flex;gap:.5rem;align-items:center;padding:calc(1rem + env(safe-area-inset-top,0px)) var(--m);z-index:5}
+  .bar b{font-weight:800;margin-right:auto;letter-spacing:-.02em;font-size:1.25rem}
+  .bar a{text-decoration:none;padding:.7rem .8rem;min-height:44px;display:inline-flex;align-items:center}
+  .bar a:hover{text-decoration:underline;text-underline-offset:5px}
+  .btn{display:inline-flex;align-items:center;min-height:48px;padding:.8rem 1.5rem;font-weight:700;text-decoration:none;color:var(--paper-ink);background:linear-gradient(135deg,#fff,#b9b9b9);transition:filter .2s}
+  .btn:hover{filter:brightness(1.08)}
+  .paper .btn{color:var(--paper);background:linear-gradient(135deg,#0a0a0a,#4a4a4a)}
+
+  /* ---------- Hero ---------- */
+  .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:7rem var(--m) 3rem}
+  .hero h1{font-size:clamp(4rem,17vw,16rem);font-weight:800;letter-spacing:-.06em;line-height:.86;will-change:translate,opacity}
+  .line{display:block;overflow:hidden;padding:.1em 0 .06em}
+  .ch{display:inline-block;background:linear-gradient(180deg,#fff 20%,#7d7d7d);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-meta{margin-top:2rem;display:grid;gap:1.75rem}
+  @media(min-width:900px){.hero-meta{grid-template-columns:1fr 1fr;align-items:end}}
+  .rot{font-weight:800;font-size:clamp(1.8rem,4.2vw,3.2rem);letter-spacing:-.04em;line-height:1.1;margin-bottom:1rem}
+  .rwrap{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em}
+  #rw{display:inline-block;background:linear-gradient(180deg,#fff,#8d8d8d);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .shine{font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.3;letter-spacing:-.02em;max-width:30ch;background:linear-gradient(110deg,#8a8a8a 38%,#fff 50%,#8a8a8a 62%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3.2s linear infinite}
+  @keyframes shine{from{background-position:120% 0}to{background-position:-120% 0}}
+  blockquote{font-size:clamp(1.05rem,1.8vw,1.25rem);margin-top:1rem;max-width:30ch;font-style:italic}
+  .who{display:flex;gap:.25rem 1.25rem;flex-wrap:wrap;align-items:center}
+  .who a:not(.btn){padding:.7rem 0;min-height:44px;display:inline-flex;align-items:center}
+
+  /* ---------- Stats ---------- */
+  .stats{display:grid;gap:2.5rem}
+  @media(min-width:900px){.stats{grid-template-columns:repeat(3,1fr)}}
+  .num{font-weight:800;font-size:clamp(5rem,13vw,10rem);letter-spacing:-.06em;line-height:.9;display:block}
+  .stats p{margin-top:.5rem;max-width:22ch}
+
+  /* ---------- Marquees ---------- */
+  .marq{overflow:hidden;padding:2rem 0;position:relative}
+  .row{display:flex;width:max-content;font-weight:800;font-size:clamp(3rem,10vw,8rem);letter-spacing:-.05em;line-height:1.05;white-space:nowrap;will-change:transform}
+  .row span{padding-right:.6em}
+  .row.alt{color:#5c5c5c}
+  .qq{display:block;border:0;font:800 clamp(7rem,24vw,20rem)/.8 var(--font);letter-spacing:-.06em;margin-top:1rem;cursor:pointer;padding:0 .1em .08em 0;background-color:transparent}
+  .qq:hover{filter:brightness(1.3)}
+
+  /* ---------- Project blocks + image figures ---------- */
+  .proj .in{display:grid;gap:2.5rem}
+  @media(min-width:900px){.proj .in{grid-template-columns:5fr 6fr;align-items:start}}
+  .proj h3{font-size:clamp(3rem,8vw,7rem)}
+  .links a{font-weight:700;padding:.5rem 0;display:inline-block}
+  .grid{display:grid;gap:10px;perspective:900px}
+  .grid.feed{grid-template-columns:repeat(3,1fr);max-width:520px;gap:8px}
+  .grid.design{grid-template-columns:repeat(3,1fr);margin-top:2rem}
+  .grid.photos{grid-template-columns:1fr 1fr}
+  /* A figure is one image slot. With no image it shows a gradient placeholder. */
+  .fig{position:relative;overflow:hidden;display:flex;align-items:flex-end;background:linear-gradient(145deg,#303030,#121212);border-radius:14px;transform-style:preserve-3d;will-change:transform}
+  .fig.sq{aspect-ratio:1} .fig.port{aspect-ratio:4/5} .fig.land{aspect-ratio:4/3}
+  .fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .fig figcaption{position:relative;z-index:1;padding:.9rem;font-weight:700;letter-spacing:-.02em;font-size:clamp(.95rem,1.8vw,1.25rem);width:100%}
+  .fig.has-img figcaption{padding-top:2.5rem;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+  .fig:not(.has-img):nth-child(3n+1){background:linear-gradient(145deg,#fff,#c9c9c9);color:var(--paper-ink)}
+  .fig:not(.has-img):nth-child(4n){background:linear-gradient(145deg,#757575,#262626);color:#fff}
+  .spot::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .3s;mix-blend-mode:soft-light;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),#fff,transparent 70%)}
+  .spot:hover::before{opacity:1}
+  .portrait{margin:0 0 2rem;max-width:380px;border-radius:14px;overflow:hidden;aspect-ratio:4/5}
+  .portrait img{width:100%;height:100%;object-fit:cover;display:block}
+
+  .menu{list-style:none;padding:0;display:grid;gap:.4rem}
+  .menu li{font-weight:800;font-size:clamp(2.2rem,7vw,5.5rem);letter-spacing:-.05em;line-height:1.05;width:max-content;max-width:100%;color:#6a6a6a;transition:transform .25s cubic-bezier(.34,1.56,.64,1),color .2s}
+  .menu li:hover{transform:translateX(1.2rem);color:var(--paper-ink)}
+  .menu .c{display:inline-block}
+  .roles{list-style:none;padding:0;display:grid;gap:2rem}
+  .roles li{font-size:clamp(1.25rem,2.4vw,1.75rem);line-height:1.3;letter-spacing:-.02em;max-width:34ch}
+  .vals{list-style:none;padding:0;font-weight:800;font-size:clamp(2.8rem,9vw,7.5rem);letter-spacing:-.055em;line-height:.95}
+  .vals li{width:max-content;max-width:100%;background:linear-gradient(90deg,#0a0a0a 50%,#6a6a6a 50%) 100% 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position .55s cubic-bezier(.22,1,.36,1)}
+  .vals li:hover{background-position:0 0}
+  .cols{display:grid;gap:1.5rem}
+  @media(min-width:900px){.cols{grid-template-columns:repeat(3,1fr)}}
+  .col{padding:1.75rem;border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.03));position:relative;overflow:hidden}
+  .col h3{font-size:1.125rem;font-weight:500;letter-spacing:0;line-height:1.4;margin-bottom:1rem}
+  .col a{display:block;font-weight:800;font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.04em;line-height:1.1;text-decoration:none;padding:.3rem 0;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+  .col a:hover{transform:translateX(.6rem)}
+  footer{padding:var(--gap) var(--m) calc(2rem + env(safe-area-inset-bottom,0px))}
+  .name{font-weight:800;font-size:clamp(3rem,10.5vw,10rem);letter-spacing:-.06em;line-height:.9;margin-bottom:3rem;padding-bottom:.08em}
+  footer p{max-width:none;display:flex;flex-wrap:wrap;gap:.25rem 2rem}
+  footer p a{padding:.7rem 0;min-height:44px;display:inline-flex;align-items:center}
+  /* Entrance start states exist only once the script runs, so content never stays hidden */
+  .js [data-r],.js .bt .w{opacity:0}
+</style>
+</head>
+<body>
+
+<script>
+/* =====================================================================================
+   EDIT ME: IMAGES AND LINKS
+   Everything you need to change for pictures and links is in this one block.
+   ===================================================================================== */
+window.SITE = {
+
+  /* Photo of you for the About section (leave "" to hide it) */
+  portrait: "",                              // <-- PUT IMAGE HERE, e.g. "images/me.jpg"
+
+  /* Feeds: the 3x3 grid. One line = one tile. */
+  feed: [
+    { label: "Reveal",  img: "" },           // <-- PUT IMAGE HERE
+    { label: "Staff",   img: "" },           // <-- PUT IMAGE HERE
+    { label: "Teaser",  img: "" },           // <-- PUT IMAGE HERE
+    { label: "Jambore", img: "" },           // <-- PUT IMAGE HERE
+    { label: "Paskah",  img: "" },           // <-- PUT IMAGE HERE
+    { label: "WE CUP",  img: "" },           // <-- PUT IMAGE HERE
+    { label: "ID card", img: "" },           // <-- PUT IMAGE HERE
+    { label: "Guide",   img: "" },           // <-- PUT IMAGE HERE
+    { label: "Story",   img: "" }            // <-- PUT IMAGE HERE
+  ],
+
+  /* Design: guidebook cover, ID card, lanyard (add or remove lines freely) */
+  design: [
+    { label: "Guidebook cover", img: "" },   // <-- PUT IMAGE HERE
+    { label: "ID card",         img: "" },   // <-- PUT IMAGE HERE
+    { label: "Lanyard",         img: "" }    // <-- PUT IMAGE HERE
+  ],
+
+  /* Photography */
+  photos: [
+    { label: "Committee Portrait, Jambore Rohani '26",    img: "" },  // <-- PUT IMAGE HERE
+    { label: "Event Documentation, Paskah UB '26",        img: "" },  // <-- PUT IMAGE HERE
+    { label: "Event Documentation, WE CUP FILKOM '26",    img: "" },  // <-- PUT IMAGE HERE
+    { label: "Committee Portrait, Paskah UB '26",         img: "" }   // <-- PUT IMAGE HERE
+  ],
+
+  /* Links: any button with data-link="name" gets its address from here ("" keeps it empty) */
+  links: {
+    gdrive:   "",    // <-- PUT LINK HERE (Find more at my GDrive)
+    personal: "",    // <-- PUT LINK HERE
+    wecup:    "",    // <-- PUT LINK HERE
+    paskah:   "",    // <-- PUT LINK HERE
+    jambore:  ""     // <-- PUT LINK HERE
+  },
+
+  /* DECORATIVE SHAPES
+     type:    asterisk | sparkle | twinkle | burst
+     in:      the section it sits in (a CSS selector)
+     size:    any CSS size. Position with left / right / top / bottom (or center: true)
+     spin:    milliseconds per full turn (leave out for no rotation). dir: -1 turns the other way
+     twinkle: true makes it pulse.  speed: scroll parallax strength.  opacity: 0 to 1 */
+  shapes: [
+    { in: ".hero", type: "burst",    size: "min(92vw,820px)",     center: true, opacity: .07, spin: 140000 },
+    { in: ".hero", type: "asterisk", size: "clamp(90px,16vw,220px)", right: "7%", top: "14%", spin: 50000, speed: .06 },
+    { in: ".hero", type: "sparkle",  size: "clamp(40px,6vw,90px)",   left: "46%", top: "26%", twinkle: true },
+    { in: "#about", type: "burst",   size: "clamp(80px,12vw,170px)", right: "5%", top: "8%", spin: 70000, dir: -1, speed: -.05 },
+    { in: "#about", type: "twinkle", size: "clamp(30px,4vw,56px)",   left: "3%", bottom: "16%", twinkle: true },
+    { in: ".marq",  type: "sparkle", size: "clamp(50px,8vw,120px)",  right: "6%", top: "8%", twinkle: true },
+    { in: ".marq",  type: "asterisk",size: "clamp(40px,6vw,90px)",   left: "4%", bottom: "6%", spin: 40000, dir: -1 },
+    { in: "#work",  type: "asterisk",size: "clamp(60px,9vw,130px)",  left: "47%", bottom: "5%", spin: 45000, dir: -1, speed: .08 },
+    { in: "#work",  type: "twinkle", size: "clamp(30px,4vw,60px)",   right: "4%", top: "6%", twinkle: true },
+    { in: "section.paper:not(.proj)", type: "asterisk", size: "clamp(70px,10vw,150px)", right: "4%", top: "7%", spin: 55000 },
+    { in: "#contact", type: "burst",   size: "clamp(90px,14vw,200px)", left: "4%", top: "6%", spin: 60000, speed: .05 },
+    { in: "#contact", type: "sparkle", size: "clamp(40px,6vw,90px)",   right: "8%", bottom: "18%", twinkle: true }
+  ],
+  stars: 18,   /* tiny twinkling stars in the background (0 = none) */
+
+  /* MOTION SWITCHES: set any to false to turn it off */
+  motion: { preloader: true, cursor: true, trail: true, aurora: true, parallax: true, shapes: true }
+};
+</script>
+
+<div class="aurora" aria-hidden="true"><div class="au a1"></div><div class="au a2"></div><div class="au a3"></div></div>
+<div class="prog" id="prog" aria-hidden="true"></div><div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<nav class="bar" aria-label="Main"><b>Rafael</b><a class="mag sc" href="#about">About</a><a class="mag sc" href="#work">Work</a><a class="mag sc" href="#contact">Contact</a></nav>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="top">
+  <h1 id="h1" aria-label="Rafael's Portfolio"><span class="line" id="l1" aria-hidden="true">Rafael's</span><span class="line" id="l2" aria-hidden="true">Portfolio</span></h1>
+  <div class="hero-meta">
+    <div data-r>
+      <!-- EDIT: COPY (rotating words are in the script: search "ROTATING WORDS") -->
+      <p class="rot">I make <span class="rwrap"><span id="rw">feeds</span></span></p>
+      <p class="shine">Information Systems student, graphic designer and storyteller behind the feed.</p>
+      <blockquote>“With great power comes great responsibility”</blockquote>
+    </div>
+    <div class="who" data-r>
+      <a class="btn mag" href="mailto:m.bayu1405@gmail.com">Email me</a>
+      <a href="https://instagram.com/rxfxxl.m" target="_blank" rel="noopener">@rxfxxl.m</a>
+      <a href="https://linkedin.com/in/rafael-mahesa-bayu-raditya" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/RAFAELSFIX10SMBR" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ ABOUT ============================ -->
+<section class="step" id="about">
+  <div class="in two">
+    <div>
+      <h2 class="bt">About me</h2>
+      <figure class="portrait" id="portrait" hidden></figure>  <!-- filled from SITE.portrait -->
+    </div>
+    <div>
+      <!-- EDIT: COPY -->
+      <p data-sr>I've always been drawn to designing Instagram feeds with a modern, polished look, and it's the thing I'm genuinely best at. My experience comes from three committees in design, documentation and multimedia, one of which I led, which gave me a taste of both creative direction and hands-on execution.</p>
+      <p data-r style="margin-top:1.5rem">I pull assets from Canva, gather inspiration from Pinterest and bring it together in Figma. That rhythm of gathering, experimenting and refining keeps me hooked on design.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ NUMBERS (count up) ============================ -->
+<section style="padding-bottom:0">
+  <div class="in stats">
+    <!-- EDIT: data-to is the number, data-suffix is what follows it -->
+    <div data-r><span class="num" data-to="4" data-suffix="+">4+</span><p>years of graphic design experience</p></div>
+    <div data-r><span class="num" data-to="3" data-suffix="">3</span><p>committees across design, documentation and multimedia</p></div>
+    <div data-r><span class="num" data-to="1" data-suffix="">1</span><p>media and information team led as coordinator</p></div>
+  </div>
+</section>
+
+<!-- ============================ SERVICES MARQUEE ============================ -->
+<div class="paper marq" style="margin-top:var(--gap)" aria-label="Photography, Video Editing, Posters, Feeds, Documentation">
+  <div class="row" id="r1" aria-hidden="true"><span>Photography</span><span>Video Editing</span><span>Posters</span><span>Feeds</span><span>Documentation</span><span>Photography</span><span>Video Editing</span><span>Posters</span><span>Feeds</span><span>Documentation</span></div>
+  <div class="row alt" id="r2" aria-hidden="true"><span>Documentation</span><span>Feeds</span><span>Posters</span><span>Video Editing</span><span>Photography</span><span>Documentation</span><span>Feeds</span><span>Posters</span><span>Video Editing</span><span>Photography</span></div>
+</div>
+
+<section>
+  <div class="in two">
+    <div><h2 class="bt" style="margin-bottom:0">What can I make for you</h2><button class="qq" id="qq" aria-label="Celebrate">??</button></div>
+    <p data-r>I can build a visual identity from scratch for an event or organization: guidebook covers and layouts, ID cards, lanyards, and social media content for reveals and announcements, mostly in Figma and Canva. I also edit teaser and promotional videos that build anticipation and tie the identity together across formats. What matters most to me is consistency: colors, typography and tone unified across every piece, so the result feels like one brand and not a collection of random pieces.</p>
+  </div>
+</section>
+
+<!-- ============================ PROJECTS ============================ -->
+<section class="step proj" id="work">
+  <div class="in">
+    <div><h3 class="bt">Feeds</h3>
+      <p data-r style="margin-top:1.5rem">I've designed reveal feeds and social media content for multiple committees, shaping how an audience forms its first impression of a team or event. It taught me how much a feed's visual consistency influences whether people engage further.</p>
+      <p class="links" data-r style="margin-top:1rem">Find more at <a href="https://instagram.com/uakkatub" target="_blank" rel="noopener">@uakkatub</a>, <a href="https://instagram.com/jamborerohani2026" target="_blank" rel="noopener">@jamborerohani2026</a> and <a href="https://instagram.com/paskahub2026" target="_blank" rel="noopener">@paskahub2026</a> on IG</p></div>
+    <div class="grid feed" data-slot="feed"></div>   <!-- filled from SITE.feed -->
+  </div>
+</section>
+
+<section class="proj">
+  <div class="in">
+    <h3 class="bt">Design</h3>
+    <div><p data-r>Design is the core of my committee work, from guidebook covers and ID cards to lanyards, all built around one visual identity. Each project sharpened my ability to make individual pieces feel like part of a cohesive brand rather than standalone designs.</p>
+      <p style="margin-top:1.5rem" data-r><a class="btn mag" href="#" data-link="gdrive">Find more at my GDrive</a></p>
+      <div class="grid design" data-slot="design"></div>   <!-- filled from SITE.design -->
+    </div>
+  </div>
+</section>
+
+<section class="step proj">
+  <div class="in">
+    <div><h3 class="bt">Photography</h3>
+      <p data-r style="margin-top:1.5rem">I've handled event photography and full documentation across committees: ID card shots, reveal feed content, and an entire event from start to finish. It taught me to balance polished, intentional shots with staying alert enough to capture moments as they unfold.</p></div>
+    <div class="grid photos" data-slot="photos"></div>   <!-- filled from SITE.photos -->
+  </div>
+</section>
+
+<section class="paper proj">
+  <div class="in" style="grid-template-columns:1fr">
+    <h3 class="bt">Miscellaneous</h3>
+    <!-- EDIT: add or remove <li> lines; hover a word to see it ripple -->
+    <ul class="menu"><li data-r>Lanyard Design</li><li data-r>IG Story Frame</li><li data-r>Animated Teaser Video</li><li data-r>Guidebook Cover and BG</li><li data-r>Gform Header</li><li data-r>ID Card Design</li></ul>
+  </div>
+</section>
+
+<section>
+  <div class="in two">
+    <h2 class="bt">I've done projects together with</h2>
+    <ul class="roles">
+      <li data-r>Staff of Design, Documentation and Multimedia at Paskah UB 2026</li>
+      <li data-r>Staff of Design, Documentation and Multimedia at WE CUP FILKOM 2026</li>
+      <li data-r>Currently Coordinator of Media and Information at Jambore Rohani 2026</li>
+      <li data-r>Staff of the Month of Unit Aktivitas Kerohanian Katolik, June 2026</li>
+    </ul>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="in two">
+    <div><h2 class="bt">Why do you need me?</h2>
+      <ul class="vals"><li data-r>Proactivity</li><li data-r>Curiosity</li><li data-r>Authenticity</li><li data-r>Continuous Growth</li><li data-r>Dedicated</li></ul></div>
+    <p data-sr>I work hard because I'm consistent, accountable and always looking to improve. In every committee I've joined, I've done more than what was asked, taking on video editing or fully documenting an event on top of my core role. That carried into my coordinator position, where I took responsibility for the team's results, set clear direction and held everyone's work to the same standard as my own. I reflect after each project on what to improve, so the next one is better than the last.</p>
+  </div>
+</section>
+
+<section class="step" id="contact">
+  <div class="in">
+    <h2 class="bt">Discover more!</h2>
+    <div class="cols">
+      <div class="col spot" data-r><h3>Personal work</h3><a href="#" data-link="personal">Personal</a></div>
+      <div class="col spot" data-r><h3>Committee work</h3><a href="#" data-link="wecup">WE CUP</a><a href="#" data-link="paskah">Paskah UB</a><a href="#" data-link="jambore">Jambore</a></div>
+      <div class="col spot" data-r><h3>Organization work</h3><a href="https://instagram.com/uakkatub" target="_blank" rel="noopener">UAKKAT</a><a href="https://instagram.com/jamborerohani2026" target="_blank" rel="noopener">Jambore IG</a><a href="https://instagram.com/paskahub2026" target="_blank" rel="noopener">Paskah UB IG</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="in">
+    <div class="name" id="name" aria-label="Rafael Mahesa Bayu Raditya">Rafael Mahesa Bayu Raditya</div>
+    <p><a href="mailto:m.bayu1405@gmail.com">m.bayu1405@gmail.com</a><a href="tel:+628179131998">+62-817-9131-998</a><a href="https://instagram.com/rxfxxl.m" target="_blank" rel="noopener">@rxfxxl.m</a></p>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================================
+   BUILD: turns the SITE block above into images and links. You normally don't edit this.
+   ===================================================================================== */
+(function(){
+  var S=window.SITE;
+  function figure(item,cls,reveal,speed){
+    var f=document.createElement('figure');
+    f.className='fig '+cls+' tilt spot'+(item.img?' has-img':'');
+    if(reveal) f.setAttribute('data-r','');
+    if(speed) f.setAttribute('data-speed',speed);
+    if(item.img){var im=new Image();im.src=item.img;im.alt=item.label;im.loading='lazy';f.appendChild(im);}
+    var c=document.createElement('figcaption');c.textContent=item.label;f.appendChild(c);return f;
+  }
+  var speeds=[.07,-.05,.1,-.03];
+  [['feed','sq',false],['design','port',true],['photos','land',true]].forEach(function(k){
+    var box=document.querySelector('[data-slot="'+k[0]+'"]'); if(!box) return;
+    (S[k[0]]||[]).forEach(function(it,i){box.appendChild(figure(it,k[1],k[2],k[0]==='feed'?0:speeds[i%4]));});
+  });
+  /* Shapes: SVG marks placed from SITE.shapes. Gradient fills are defined once below. */
+  if((S.motion||{}).shapes!==false){
+    var D=document.createElement('div');D.setAttribute('aria-hidden','true');
+    D.innerHTML='<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="g-light" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="100"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#8d8d8d"/></linearGradient><linearGradient id="g-dark" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="100"><stop offset="0" stop-color="#0a0a0a"/><stop offset="1" stop-color="#6a6a6a"/></linearGradient></defs></svg>';
+    document.body.appendChild(D);
+    var TW='M50 0C51.5 38 62 48.5 100 50C62 51.5 51.5 62 50 100C48.5 62 38 51.5 0 50C38 48.5 48.5 38 50 0Z';
+    var P={
+      asterisk:'<path d="M50 8V92M13.6 29L86.4 71M13.6 71L86.4 29" stroke-width="13" stroke-linecap="round"/>',
+      sparkle:'<path d="M50 0C54 30 70 46 100 50C70 54 54 70 50 100C46 70 30 54 0 50C30 46 46 30 50 0Z"/>',
+      twinkle:'<path d="'+TW+'"/>',
+      burst:'<path d="'+TW+'"/><path transform="rotate(45 50 50)" d="'+TW+'"/>'
+    };
+    var mkShape=function(c,host){
+      var el=document.createElement('span'),dark=host.classList.contains('paper'),g=dark?'url(#g-dark)':'url(#g-light)',line=c.type==='asterisk';
+      el.className='shape';el.setAttribute('aria-hidden','true');
+      el.style.width=el.style.height=c.size||'60px';
+      ['left','right','top','bottom'].forEach(function(k){if(c[k]!=null)el.style[k]=c[k];});
+      if(c.center){el.style.left=el.style.right=el.style.top=el.style.bottom='0';el.style.margin='auto';}
+      var o=c.opacity==null?1:c.opacity;el.dataset.o=o;el.style.opacity=o;
+      if(c.speed)el.dataset.speed=c.speed;
+      if(c.spin){el.dataset.spin=c.spin;el.dataset.dir=c.dir||1;}
+      if(c.twinkle)el.dataset.tw=1;
+      el.innerHTML='<svg viewBox="0 0 100 100" fill="'+(line?'none':g)+'" stroke="'+(line?g:'none')+'">'+P[c.type]+'</svg>';
+      host.appendChild(el);
+    };
+    (S.shapes||[]).forEach(function(c){var h=document.querySelector(c['in']);if(h&&P[c.type])mkShape(c,h);});
+    var sky=document.querySelector('.aurora');
+    for(var i=0;i<(S.stars||0);i++)mkShape({type:'twinkle',size:(6+Math.random()*10)+'px',left:(Math.random()*100)+'%',top:(Math.random()*100)+'%',twinkle:true,opacity:.85},sky);
+  }
+  if(S.portrait){var p=document.getElementById('portrait');p.hidden=false;var im=new Image();im.src=S.portrait;im.alt='Rafael';p.appendChild(im);}
+  document.querySelectorAll('[data-link]').forEach(function(a){
+    var v=(S.links||{})[a.dataset.link]; if(!v) return; a.href=v; if(/^https?:/.test(v)){a.target='_blank';a.rel='noopener';}
+  });
+})();
+</script>
+
+<script>
+/* =====================================================================================
+   MOTION: anime.js plus effects in the style of reactbits.dev (written in plain JS because
+   the originals are React/GSAP components). Switch parts off in SITE.motion above.
+   ===================================================================================== */
+(function(){
+  var S=window.SITE,M=S.motion||{};
+  if (typeof anime==='undefined' || matchMedia('(prefers-reduced-motion: reduce)').matches){ document.querySelector('.shine').style.animation='none'; return; }
+  var H=document.documentElement; H.classList.add('js');
+  var fine=matchMedia('(hover:hover) and (pointer:fine)').matches, vh=innerHeight;
+  addEventListener('resize',function(){vh=innerHeight;});
+  var CH='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+  /* helper: text scramble that resolves left to right */
+  function scramble(el,final,dur){
+    var st={p:0};anime({targets:st,p:1,duration:dur,easing:'easeInOutQuad',update:function(){
+      var n=Math.floor(st.p*final.length);
+      el.textContent=final.split('').map(function(c,i){return(i<n||c===' ')?c:CH[Math.random()*CH.length|0];}).join('');
+    },complete:function(){el.textContent=final;}});
+  }
+  /* helper: split an element's text into word spans */
+  function words(el,cls){var t=el.textContent;el.textContent='';return t.split(' ').map(function(w,i,a){var s=document.createElement('span');if(cls)s.className=cls;s.textContent=w+(i<a.length-1?' ':'');el.appendChild(s);return s;});}
+
+  /* ---------- 1. PRELOADER: counter, then the curtain lifts ---------- */
+  function preloader(done){
+    if(M.preloader===false) return done();
+    var p=document.createElement('div');p.className='pre';p.setAttribute('aria-hidden','true');
+    p.innerHTML='<div class="pre-n"><span id="pn">0</span>%</div><div class="pre-t">Rafael Mahesa Bayu Raditya</div>';
+    document.body.appendChild(p);document.body.style.overflow='hidden';
+    var st={v:0},pn=document.getElementById('pn');
+    anime({targets:st,v:100,round:1,duration:1500,easing:'easeInOutQuad',update:function(){pn.textContent=st.v;},complete:function(){
+      anime({targets:p,translateY:'-100%',duration:900,easing:'easeInOutQuart',complete:function(){p.remove();document.body.style.overflow='';}});
+      done();
+    }});
+  }
+
+  /* ---------- 2. HERO: letters rise from a mask, then swell near the pointer ---------- */
+  var letters=[];
+  ['l1','l2'].forEach(function(id){
+    var el=document.getElementById(id),t=el.textContent;el.textContent='';
+    t.split('').forEach(function(c){var s=document.createElement('span');s.className='ch';s.textContent=c;s.style.transform='translateY(115%)';el.appendChild(s);letters.push(s);});
+  });
+  var ready=false;
+  function startHero(){
+    anime.timeline({easing:'easeOutExpo',complete:function(){ready=true;}})
+      .add({targets:'#l1 .ch',translateY:['115%','0%'],rotate:[8,0],duration:1200,delay:anime.stagger(50)})
+      .add({targets:'#l2 .ch',translateY:['115%','0%'],rotate:[-8,0],duration:1200,delay:anime.stagger(40)},'-=850');
+    anime({targets:'.hero [data-r]',opacity:[0,1],translateY:[24,0],duration:900,delay:anime.stagger(140,{start:1000}),easing:'easeOutCubic'});
+  }
+  preloader(startHero);
+  if(fine) document.querySelector('.hero').addEventListener('pointermove',function(e){
+    if(!ready) return;
+    letters.forEach(function(s){var r=s.getBoundingClientRect(),d=Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2)),k=Math.max(0,1-d/260);
+      s.style.transform='translateY('+(-k*5)+'%) scale('+(1+k*.1)+')';});
+  });
+
+  /* ---------- 3. ROTATING WORDS (edit the list) ---------- */
+  var list=['feeds','teaser videos','ID cards','guidebooks','portraits','lanyards'],wi=0,rw=document.getElementById('rw');
+  setInterval(function(){
+    anime({targets:rw,translateY:[0,'-70%'],opacity:[1,0],duration:260,easing:'easeInQuad',complete:function(){
+      wi=(wi+1)%list.length;rw.textContent=list[wi];
+      anime({targets:rw,translateY:['70%','0%'],opacity:[0,1],duration:480,easing:'easeOutBack'});
+    }});
+  },2400);
+
+  /* ---------- 4. AURORA drifts ---------- */
+  if(M.aurora!==false) [['.a1',140,90,14000],['.a2',-120,-80,17000],['.a3',-90,60,20000]].forEach(function(a){
+    anime({targets:a[0],translateX:a[1],translateY:a[2],scale:[1,1.18],duration:a[3],direction:'alternate',loop:true,easing:'easeInOutSine'});
+  });
+
+  /* ---------- 5. HEADINGS blur in word by word; everything else rises ---------- */
+  document.querySelectorAll('.bt').forEach(function(h){var t=h.textContent;h.setAttribute('aria-label',t);words(h,'w').forEach(function(s){s.setAttribute('aria-hidden','true');s.textContent=s.textContent.replace(/ $/,'\u00a0');});});
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){
+    if(!e.isIntersecting) return; io.unobserve(e.target);
+    if(e.target.classList.contains('bt')) anime({targets:e.target.querySelectorAll('.w'),opacity:[0,1],translateY:[36,0],filter:['blur(14px)','blur(0px)'],duration:900,delay:anime.stagger(80),easing:'easeOutCubic'});
+    else anime({targets:e.target,opacity:[0,1],translateY:[28,0],duration:800,delay:(e.target.dataset.d|0),easing:'easeOutCubic'});
+  });},{threshold:.2});
+  document.querySelectorAll('.bt,section [data-r],footer [data-r]').forEach(function(el,i){ if(!el.closest('.hero')){el.dataset.d=(i%4)*90;io.observe(el);} });
+
+  /* ---------- 6. COUNT-UP numbers ---------- */
+  document.querySelectorAll('.num').forEach(function(n){
+    var to=+n.dataset.to,suf=n.dataset.suffix||'',st={v:0};n.textContent='0'+suf;
+    new IntersectionObserver(function(en,o){ if(!en[0].isIntersecting) return;o.disconnect();
+      anime({targets:st,v:to,round:1,duration:1800,easing:'easeOutExpo',update:function(){n.textContent=st.v+suf;}});
+    },{threshold:.6}).observe(n);
+  });
+
+  /* ---------- 7. FEED tiles pop in from the centre ---------- */
+  var tiles=document.querySelectorAll('[data-slot="feed"] .fig');tiles.forEach(function(t){t.style.opacity=0;});
+  var feed=document.querySelector('[data-slot="feed"]');
+  if(feed) new IntersectionObserver(function(en,o){ if(!en[0].isIntersecting) return;o.disconnect();
+    anime({targets:tiles,opacity:[0,1],scale:[.5,1],rotate:[-14,0],duration:800,delay:anime.stagger(80,{grid:[3,3],from:'center'}),easing:'easeOutBack'});
+  },{threshold:.3}).observe(feed);
+
+  /* ---------- 7b. SHAPES: pop in once, then spin slowly and/or twinkle ---------- */
+  function twinkle(el,base){
+    anime({targets:el,scale:[1,.3],opacity:[base,base*.2],rotate:[0,45],duration:900+Math.random()*1700,delay:Math.random()*1500,direction:'alternate',loop:true,easing:'easeInOutSine'});
+  }
+  [].slice.call(document.querySelectorAll('.shape')).forEach(function(el){
+    var base=+el.dataset.o||1,svg=el.firstChild;el.style.opacity=0;
+    if(el.dataset.spin) anime({targets:svg,rotate:360*(+el.dataset.dir||1),duration:+el.dataset.spin,easing:'linear',loop:true});
+    new IntersectionObserver(function(en,o){ if(!en[0].isIntersecting) return;o.disconnect();
+      anime({targets:el,opacity:[0,base],scale:[0,1],duration:1000,delay:Math.random()*500,easing:'easeOutBack',complete:function(){ if(el.dataset.tw) twinkle(el,base); }});
+    }).observe(el);
+  });
+
+  /* ---------- 8. SCROLL LOOP: marquee velocity, parallax, word-by-word reading ---------- */
+  var rows=[{el:document.getElementById('r1'),dir:-1,x:0},{el:document.getElementById('r2'),dir:1,x:0}],lastY=scrollY,vel=0;
+  rows[1].x=-rows[1].el.scrollWidth/2;
+  var par=[].slice.call(document.querySelectorAll('[data-speed]'));
+  var srs=[].slice.call(document.querySelectorAll('[data-sr]')).map(function(p){var ws=words(p);ws.forEach(function(s){s.style.opacity=.3;s.style.transition='opacity .25s';});return{p:p,ws:ws,n:-1};});
+  var h1=document.getElementById('h1'),au=[].slice.call(document.querySelectorAll('.au')),prog=document.getElementById('prog');
+  (function tick(){
+    var y=scrollY;vel+=((y-lastY)-vel)*.12;lastY=y;
+    rows.forEach(function(r){var half=r.el.scrollWidth/2;r.x+=r.dir*(.9+Math.abs(vel)*.5);
+      if(r.x<=-half) r.x+=half; if(r.x>0&&r.dir>0) r.x-=half;
+      r.el.style.transform='translateX('+r.x+'px) skewX('+Math.max(-10,Math.min(10,-vel*.35))+'deg)';});
+    if(M.parallax!==false){
+      par.forEach(function(el){var r=el.getBoundingClientRect();el.style.translate='0 '+((r.top+r.height/2-vh/2)*el.dataset.speed)+'px';});
+      au.forEach(function(a,i){a.style.translate='0 '+(-y*(.08+i*.05))+'px';});
+    }
+    if(y<vh){h1.style.translate='0 '+(y*.28)+'px';h1.style.opacity=Math.max(0,1-y/(vh*.85));}
+    srs.forEach(function(o){var r=o.p.getBoundingClientRect(),pg=Math.min(1,Math.max(0,(vh*.9-r.top)/(r.height+vh*.25))),n=Math.round(pg*o.ws.length);
+      if(n!==o.n){o.ws.forEach(function(s,i){s.style.opacity=i<n?1:.3;});o.n=n;}});
+    prog.style.transform='scaleX('+(y/(H.scrollHeight-vh||1))+')';
+    requestAnimationFrame(tick);
+  })();
+
+  /* ---------- 9. FOOTER name decrypts; nav links scramble on hover ---------- */
+  var nm=document.getElementById('name'),final=nm.textContent;
+  new IntersectionObserver(function(en,o){ if(!en[0].isIntersecting) return;o.disconnect();scramble(nm,final,1600);},{threshold:.5}).observe(nm);
+  if(fine) document.querySelectorAll('.sc').forEach(function(a){var t=a.textContent;a.addEventListener('pointerenter',function(){scramble(a,t,450);});});
+
+  /* ---------- 10. MISC menu: letters ripple on hover ---------- */
+  document.querySelectorAll('.menu li').forEach(function(li){
+    var split=false;
+    li.addEventListener('pointerenter',function(){
+      if(!split){var t=li.textContent;li.setAttribute('aria-label',t);li.textContent='';t.split('').forEach(function(c){var s=document.createElement('span');s.className='c';s.setAttribute('aria-hidden','true');s.textContent=c===' '?'\u00a0':c;li.appendChild(s);});split=true;}
+      anime({targets:li.querySelectorAll('.c'),translateY:[0,-14,0],duration:550,delay:anime.stagger(28),easing:'easeInOutQuad'});
+    });
+  });
+
+  /* ---------- 11. CLICK SPARK (bigger burst on the ??) ---------- */
+  function burst(x,y,n,dist){
+    for(var i=0;i<n;i++){var s=document.createElement('span');s.className='spark';s.style.left=x+'px';s.style.top=y+'px';document.body.appendChild(s);
+      var a=Math.PI*2*i/n+Math.random()*.4,d=dist*(.6+Math.random()*.6);
+      anime({targets:s,translateX:Math.cos(a)*d,translateY:Math.sin(a)*d,scale:[1,0],opacity:[1,0],duration:700,easing:'easeOutQuad',complete:function(an){an.animatables[0].target.remove();}});}
+  }
+  addEventListener('click',function(e){burst(e.clientX,e.clientY,8,46);});
+  var qq=document.getElementById('qq');
+  qq.addEventListener('click',function(e){e.stopPropagation();var r=qq.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,28,160);
+    anime({targets:qq,rotate:[0,-6,6,-3,0],scale:[1,1.12,1],duration:700,easing:'easeInOutBack'});});
+
+  /* ---------- 12. POINTER-ONLY: spotlight, tilt, magnet, cursor, trail ---------- */
+  if(!fine) return;
+  document.querySelectorAll('.spot').forEach(function(c){c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');});});
+  document.querySelectorAll('.tilt').forEach(function(c){
+    c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      c.style.transform='rotateX('+(-y*14)+'deg) rotateY('+(x*14)+'deg) scale(1.04)';});
+    c.addEventListener('pointerleave',function(){anime({targets:c,rotateX:0,rotateY:0,scale:1,duration:500,easing:'easeOutElastic(1,.7)'});});
+  });
+  document.querySelectorAll('.mag').forEach(function(m){
+    m.addEventListener('pointermove',function(e){var r=m.getBoundingClientRect();m.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.35)+'px)';});
+    m.addEventListener('pointerleave',function(){anime({targets:m,translateX:0,translateY:0,duration:600,easing:'easeOutElastic(1,.6)'});});
+  });
+  if(M.cursor!==false){
+    var cur=document.getElementById('cursor'),cx=0,cy=0,tx=0,ty=0;
+    addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY;cur.style.opacity=1;});
+    (function f(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cur.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(f);})();
+    document.querySelectorAll('a,button,.tilt').forEach(function(el){
+      el.addEventListener('pointerenter',function(){anime({targets:cur,width:64,height:64,margin:'-32px 0 0 -32px',duration:250,easing:'easeOutQuad'});});
+      el.addEventListener('pointerleave',function(){anime({targets:cur,width:34,height:34,margin:'-17px 0 0 -17px',duration:200,easing:'easeOutQuad'});});
+    });
+  }
+  if(M.trail!==false){
+    var last=0;
+    addEventListener('pointermove',function(e){var now=performance.now();if(now-last<40)return;last=now;
+      var d=document.createElement('span');d.className='dot';d.style.left=e.clientX+'px';d.style.top=e.clientY+'px';document.body.appendChild(d);
+      anime({targets:d,scale:[1,0],opacity:[.7,0],duration:650,easing:'easeOutQuad',complete:function(){d.remove();}});});
+  }
+})();
+</script>
+</body>
+</html>
